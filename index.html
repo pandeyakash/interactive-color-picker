@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interative Color Picker</title>
+    <style>
+      .square {
+        width: 300px;
+        height: 300px;
+        margin: auto;
+        margin-top: 100px;
+      }
+
+      input {
+        width: 200px;
+        height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function ColorInput({ fn }) {
+      return (
+        <div>
+          <input
+            onChange={fn}
+            type="text"
+            placeholder="Enter the color in HEX"
+          />
+        </div>
+      );
+    }
+
+    function DisplayColor({ color }) {
+      return (
+        <div style={{ backgroundColor: `#${color}` }} className="square"></div>
+      );
+    }
+
+    function App() {
+      const [color, setColor] = React.useState("000");
+
+      function clickHandle(e) {
+        console.log("Hi");
+        console.log(e.target.value);
+        setColor(`${e.target.value}`);
+      }
+
+      return (
+        <>
+          <ColorInput fn={clickHandle} />
+          <DisplayColor color={color} />
+        </>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</html>
