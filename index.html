@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Interative Color Picker</title>
+    <title>Interactive Color Picker</title>
     <style>
+      /* Style for the square that will display the selected color */
       .square {
         width: 300px;
         height: 300px;
@@ -12,6 +13,7 @@
         margin-top: 100px;
       }
 
+      /* Style for the input field */
       input {
         width: 200px;
         height: 30px;
@@ -19,15 +21,24 @@
     </style>
   </head>
   <body>
+    <!-- Root element where the React app will be rendered -->
     <div id="root"></div>
   </body>
+
+  <!-- Including React and ReactDOM libraries from CDN -->
   <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
   <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+
+  <!-- Including Babel standalone to transpile JSX in the browser -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- The React code written in JSX -->
   <script type="text/babel">
+    /* Functional component for color input */
     function ColorInput({ fn }) {
       return (
         <div>
+          {/* Input field where users can enter a hex color code */}
           <input
             onChange={fn}
             type="text"
@@ -37,21 +48,28 @@
       );
     }
 
+    /* Functional component to display the color */
     function DisplayColor({ color }) {
       return (
+        /* A square div whose background color is dynamically set */
         <div style={{ backgroundColor: `#${color}` }} className="square"></div>
       );
     }
 
+    /* Main app component */
     function App() {
+      /* State to hold the current color input (default is black: '000') */
       const [color, setColor] = React.useState("000");
 
+      /* Event handler function for input change */
       function clickHandle(e) {
         console.log("Hi");
         console.log(e.target.value);
+        /* Update the state with the entered color */
         setColor(`${e.target.value}`);
       }
 
+      /* Render the ColorInput and DisplayColor components */
       return (
         <>
           <ColorInput fn={clickHandle} />
@@ -60,6 +78,7 @@
       );
     }
 
+    /* Render the App component inside the root div */
     const root = ReactDOM.createRoot(document.getElementById("root"));
     root.render(<App />);
   </script>
